@@ -9,6 +9,13 @@ custom_stop_words = ['nil', 'system', 'areas', 'world', 'ideas', 'things', 'soci
 lemmatizer = nltk.stem.wordnet.WordNetLemmatizer()
 
 def processComment(comment):
+    """
+        Preprocessing including removing stop words, punctuations, tokenization and lemmatization
+    Args: 
+        comment: a single input sentence or doc (a single data point)
+    Return: 
+        Prepocessed string
+    """
     try:
         tokens = nltk.tokenize.word_tokenize(comment)
         filtered_tokens = []
@@ -44,6 +51,13 @@ def processComment(comment):
         return ""
     
 def get_sentenses(fname):
+    """
+        Get sentences (data points) from input file and writes the output to a txt file by the name 'preprocessed.txt'. Assuming the file is in the same folder
+    Args:
+        fname: Input file name
+    Return: 
+        A dictionary mapping preprocessed sentenses to actual input sentences
+    """
     fhand = open(fname, errors = 'ignore')
      
     preprocessing_result = {}
@@ -57,15 +71,24 @@ def get_sentenses(fname):
         preprocessing_result[preprocessed_sentenses[i]] = actual_sentenses[i]
     
     fhand.close()
+
     fhand = open('preprocessed.txt', 'w')
     
     for i in preprocessed_sentenses:
         fhand.write(i + '\n')
+
     fhand.close()
 
     return preprocessing_result
 
 def get_lemma(phrase):
+    """
+        Lemmatization for single word phrases
+    Args: 
+        phrase: a single word phrase
+    Return: 
+        lemma of the phrase
+    """
     pos_tag = nltk.pos_tag(nltk.word_tokenize(phrase))
     if 'NN' in pos_tag[0][1] or 'NP' in pos_tag[0][1]:
         lemma = lemmatizer.lemmatize(pos_tag[0][0])
@@ -80,6 +103,14 @@ def get_lemma(phrase):
 
 
 def get_phrases(fname):
+    """
+        Extract key phrases fromthe json response of the Microsoft Text Analytics Api
+    Args: 
+        fname: json file name 
+    Return: 
+        None
+        Saves the extracted phrases (coma separated for a single description and '\n' separated for 2 different descriptions)
+    """
     with open(fname) as f:
         data = f.read().casefold()
         data = json.loads(data)
@@ -119,5 +150,5 @@ def get_phrases(fname):
             f.write('\n')
             
 if __name__ == '__main__':
-    get_phrases('finalDataSet_2_results.json')
+    get_phrases('keyPhrases.json')
     print('Done')

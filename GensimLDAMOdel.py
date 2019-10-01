@@ -3,12 +3,17 @@ from gensim import corpora, models
 from preprocessing import get_sentenses
 
 def run_lda(num_topics, fname):
-
+	"""
+		LDA 
+	Args: 
+		num_topics: number of topics for clustering (no of clusters)
+		fname: Output
+	"""
 	processed_result = get_sentenses(fname)
 	texts = []
 	discriptions = []
 	
-	with open('finalDataSet_2.txt') as f:
+	with open('requiredData.txt') as f:
 		dataSet = f.readlines()
 	with open('KeyPhrasesOfDescriptions.txt') as f:
 		KeyPhrases = f.readlines()
@@ -55,4 +60,4 @@ def run_lda(num_topics, fname):
 	fhand.close()
 	
 if __name__ == "__main__":
-	run_lda(8, 'KeyPhrasesOfDescriptions.txt')
+	run_lda(8, 'clusters.txt')

@@ -1,8 +1,8 @@
 import warnings
-from gensim.scripts.word2vec2tensor import word2vec2tensor
 warnings.filterwarnings(action = 'ignore', category = UserWarning, module = 'gensim')
 
 from gensim import corpora
+from gensim.scripts.word2vec2tensor import word2vec2tensor
 from gensim.models.wrappers import LdaMallet
 import nltk
 import json
