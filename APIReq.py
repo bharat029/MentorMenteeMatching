@@ -1,5 +1,6 @@
 import json
 import requests
+import os
  
 fhand = open('requiredData.txt')
  
@@ -12,7 +13,7 @@ for line in data:
     json_data["documents"].append(temp)
     id += 1
 
-subscription_key = "a1cd3c4c72724acfb1906f6462367099"
+subscription_key = os.environ['TEXT_ANALYTICS_API_KEY']
 assert subscription_key
 text_analytics_base_url =  "https://australiaeast.api.cognitive.microsoft.com/text/analytics/v2.0/" 
 key_phrase_api_url = text_analytics_base_url + "keyPhrases"  
