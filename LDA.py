@@ -121,7 +121,7 @@ class LDA:
         result = self.process_result(processed_result, topic_top_words, topic_words_and_probs)
         clusters = []
         actual_clusters = []
-        with open('finalDataSet_2.txt') as f:
+        with open('requiredData.txt') as f:
             dataSet = f.readlines()
         with open('KeyPhrasesOfDescriptions.txt') as f:
             KeyPhrases = f.readlines()
@@ -176,11 +176,11 @@ class LDA:
             for word in top_words:
                 best_topic_words[i].append((word[0], word[1]))
     
-#         for i, val in enumerate(best_topic_words):
-#             print(i + 1, ":", val)
-#         print('\n\n')
-#         for i, val in enumerate(topic_top_words):
-#             print(i + 1, ":", val)
+        for i, val in enumerate(best_topic_words):
+            print(i + 1, ":", val)
+        print('\n\n')
+        for i, val in enumerate(topic_top_words):
+            print(i + 1, ":", val)
 
         return result
   
